@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Built-in middleware (no body-parser needed)
+// Middleware
 app.use(express.urlencoded({ extended: true }));
 
 // In-memory storage
@@ -32,16 +32,14 @@ app.get('/', (req, res) => {
 
         h2 {
             text-align: center;
-            color: white;
         }
 
         .section {
             background: white;
             padding: 20px;
-            margin: 20px auto;
+            margin-bottom: 30px;
             border-radius: 12px;
-            max-width: 600px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         input, select {
