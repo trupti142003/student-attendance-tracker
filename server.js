@@ -3,19 +3,15 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
 app.use(express.urlencoded({ extended: true }));
 
-// In-memory storage
 let students = [];
 let attendance = [];
 
-// Get today's date
 function getTodayDate() {
     return new Date().toISOString().split('T')[0];
 }
 
-// HOME PAGE
 app.get('/', (req, res) => {
     res.send(`
 <!DOCTYPE html>
@@ -94,7 +90,7 @@ app.get('/', (req, res) => {
 </head>
 <body>
 
-<h2>📘 Student Attendance Tracker</h2>
+<h2>Student Attendance Tracker</h2>
 
 <div class="section">
     <h3>Add Student</h3>
@@ -157,7 +153,6 @@ app.get('/', (req, res) => {
     `);
 });
 
-// ADD STUDENT
 app.post('/add-student', (req, res) => {
     const { roll, name } = req.body;
 
@@ -168,7 +163,6 @@ app.post('/add-student', (req, res) => {
     res.redirect('/');
 });
 
-// MARK ATTENDANCE
 app.post('/mark-attendance', (req, res) => {
     const { roll, status, date } = req.body;
     const student = students.find(s => s.roll === roll);
@@ -193,7 +187,6 @@ app.post('/mark-attendance', (req, res) => {
     res.redirect('/');
 });
 
-// START SERVER
 app.listen(port, () => {
     console.log("Server running on port " + port);
 });
