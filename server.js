@@ -6,9 +6,11 @@ const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// In-memory storage
 let students = [];
 let attendance = [];
 
+// Get today's date
 function getTodayDate() {
     return new Date().toISOString().split('T')[0];
 }
@@ -172,9 +174,7 @@ app.post('/mark-attendance', (req, res) => {
     const student = students.find(s => s.roll === roll);
 
     if (student) {
-
-        // Check if attendance already exists
-        const existing = attendance.find(a => 
+        const existing = attendance.find(a =>
             a.roll === roll && a.date === date
         );
 
@@ -186,7 +186,6 @@ app.post('/mark-attendance', (req, res) => {
                 status: status
             });
         } else {
-            // Update existing record instead of duplicating
             existing.status = status;
         }
     }
@@ -194,7 +193,7 @@ app.post('/mark-attendance', (req, res) => {
     res.redirect('/');
 });
 
-
+// START SERVER
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log("Server running on port " + port);
 });
